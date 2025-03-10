@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "@/hooks/use-toast";
 import { ThumbsUp } from "lucide-react";
 import { Leader, VOTE_COST_IN_MON, VOTE_COST_IN_WEI } from "@/lib/constants";
 import { useWallet } from "@/hooks/useWallet";

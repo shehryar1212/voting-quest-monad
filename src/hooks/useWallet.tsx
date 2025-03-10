@@ -1,7 +1,22 @@
 
 import { useState, useEffect, useCallback } from "react";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "@/hooks/use-toast";
 import { MONAD_TESTNET_CHAIN_ID, MONAD_NETWORK_PARAMS } from "@/lib/constants";
+
+// Define Ethereum provider interface for window.ethereum
+declare global {
+  interface Window {
+    ethereum?: {
+      isMetaMask?: boolean;
+      request: (args: {
+        method: string;
+        params?: any[];
+      }) => Promise<any>;
+      on: (eventName: string, callback: (...args: any[]) => void) => void;
+      removeListener?: (eventName: string, callback: (...args: any[]) => void) => void;
+    };
+  }
+}
 
 interface WalletState {
   address: string;
@@ -86,7 +101,8 @@ export function useWallet(): [WalletState, WalletActions] {
       
       // Convert balance from wei to ETH (string representation)
       const balanceInWei = BigInt(balanceHex);
-      const balanceInEth = balanceInWei / BigInt(10**15) / 1000; // Convert wei to ETH
+      // Fix the division of bigint by number issue
+      const balanceInEth = Number(balanceInWei) / 10**18;
       setBalance(balanceInEth.toString());
     } catch (error) {
       console.error("Failed to get balance", error);
