@@ -188,20 +188,40 @@ export function useWallet(): [WalletState, WalletActions] {
     if (!hasEthereum) return false;
 
     try {
+      console.log("Attempting to switch to chain ID:", MONAD_TESTNET_CHAIN_ID);
+      
       // First try to switch to the network
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: MONAD_TESTNET_CHAIN_ID }],
       });
+      
+      // After switching, update the chainId state
+      const updatedChainId = await window.ethereum.request({
+        method: "eth_chainId",
+      });
+      setChainId(updatedChainId);
+      
       return true;
     } catch (switchError: any) {
+      console.error("Switch error:", switchError);
+      
       // If the network doesn't exist in the wallet, try to add it
       if (switchError.code === 4902) {
         try {
+          console.log("Adding network with params:", MONAD_NETWORK_PARAMS);
+          
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [MONAD_NETWORK_PARAMS],
           });
+          
+          // After adding, update the chainId state
+          const updatedChainId = await window.ethereum.request({
+            method: "eth_chainId",
+          });
+          setChainId(updatedChainId);
+          
           return true;
         } catch (addError) {
           console.error("Failed to add Monad network", addError);

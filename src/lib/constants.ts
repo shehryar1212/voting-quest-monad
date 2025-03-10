@@ -1,6 +1,6 @@
 
 // Network constants
-export const MONAD_TESTNET_CHAIN_ID = "0x27AF";  // 10143 decimal
+export const MONAD_TESTNET_CHAIN_ID = "0x27af";  // 10143 decimal (lowercase hex)
 export const MONAD_TESTNET_CHAIN_ID_DECIMAL = 10143;
 export const MONAD_TESTNET_RPC_URL = "https://testnet-rpc.monad.xyz";
 export const MON_DECIMAL_PLACES = 18;
