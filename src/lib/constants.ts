@@ -1,7 +1,7 @@
 
 // Network constants
-export const MONAD_TESTNET_CHAIN_ID = "0x2A9D";  // 10909 decimal
-export const MONAD_TESTNET_RPC_URL = "https://rpc.testnet.monad.xyz";
+export const MONAD_TESTNET_CHAIN_ID = "0x27AF";  // 10143 decimal
+export const MONAD_TESTNET_RPC_URL = "https://testnet-rpc.monad.xyz";
 export const MON_DECIMAL_PLACES = 18;
 
 // Vote constants
@@ -103,5 +103,6 @@ export const MONAD_NETWORK_PARAMS = {
     decimals: MON_DECIMAL_PLACES,
   },
   rpcUrls: [MONAD_TESTNET_RPC_URL],
-  blockExplorerUrls: ["https://explorer.testnet.monad.xyz/"],
+  blockExplorerUrls: ["https://testnet.monadexplorer.com"],
 };
+
