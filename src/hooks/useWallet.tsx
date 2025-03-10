@@ -1,7 +1,10 @@
-
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "@/hooks/use-toast";
-import { MONAD_TESTNET_CHAIN_ID, MONAD_NETWORK_PARAMS } from "@/lib/constants";
+import { 
+  MONAD_TESTNET_CHAIN_ID, 
+  MONAD_TESTNET_CHAIN_ID_DECIMAL, 
+  MONAD_NETWORK_PARAMS 
+} from "@/lib/constants";
 
 // Define Ethereum provider interface for window.ethereum
 declare global {
@@ -41,6 +44,17 @@ export function useWallet(): [WalletState, WalletActions] {
   
   // Check if ethereum is available
   const hasEthereum = typeof window !== "undefined" && window.ethereum;
+
+  // Check if connected to the correct network
+  const isCorrectNetwork = useCallback(() => {
+    if (!chainId) return false;
+    
+    // Handle both hex and decimal formats for comparison
+    return (
+      chainId.toLowerCase() === MONAD_TESTNET_CHAIN_ID.toLowerCase() || 
+      parseInt(chainId, 16) === MONAD_TESTNET_CHAIN_ID_DECIMAL
+    );
+  }, [chainId]);
 
   // Detect when account changes
   useEffect(() => {
@@ -147,7 +161,7 @@ export function useWallet(): [WalletState, WalletActions] {
         
         setChainId(currentChainId);
         
-        if (currentChainId !== MONAD_TESTNET_CHAIN_ID) {
+        if (!isCorrectNetwork()) {
           const switched = await switchToMonadNetwork();
           if (!switched) {
             toast.warning("Please switch to the Monad Testnet to use this app.", {
@@ -211,7 +225,7 @@ export function useWallet(): [WalletState, WalletActions] {
 
     try {
       // Check network before sending
-      if (chainId !== MONAD_TESTNET_CHAIN_ID) {
+      if (!isCorrectNetwork()) {
         const switched = await switchToMonadNetwork();
         if (!switched) {
           toast.error("Please switch to Monad Testnet to vote.");
@@ -250,7 +264,7 @@ export function useWallet(): [WalletState, WalletActions] {
       balance,
       chainId,
       isConnected,
-      isCorrectNetwork: chainId === MONAD_TESTNET_CHAIN_ID,
+      isCorrectNetwork: isCorrectNetwork(),
     },
     {
       connect,

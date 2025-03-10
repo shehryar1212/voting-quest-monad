@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, Wallet } from "lucide-react";
@@ -11,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useWallet } from "@/hooks/useWallet";
-import { MONAD_TESTNET_CHAIN_ID } from "@/lib/constants";
+import { MONAD_TESTNET_CHAIN_ID, MONAD_TESTNET_CHAIN_ID_DECIMAL } from "@/lib/constants";
 
 export function WalletButton() {
   const [walletState, walletActions] = useWallet();
@@ -133,8 +132,8 @@ export function WalletButton() {
               <div className="flex flex-col space-y-2 text-center items-center">
                 <span className="text-xs text-gray-500">Network</span>
                 <div className="flex items-center">
-                  <div className={`h-2 w-2 rounded-full mr-2 ${chainId === MONAD_TESTNET_CHAIN_ID ? 'bg-green-500' : 'bg-orange-500'}`}></div>
-                  {chainId === MONAD_TESTNET_CHAIN_ID ? 'Monad Testnet' : 'Wrong Network'}
+                  <div className={`h-2 w-2 rounded-full mr-2 ${isCorrectNetwork ? 'bg-green-500' : 'bg-orange-500'}`}></div>
+                  {isCorrectNetwork ? 'Monad Testnet' : 'Wrong Network'}
                 </div>
               </div>
             </div>
