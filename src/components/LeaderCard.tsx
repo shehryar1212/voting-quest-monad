@@ -69,8 +69,8 @@ export default function LeaderCard({ leader, onVote }: LeaderCardProps) {
 
   return (
     <>
-      <Card className="crypto-card h-[340px] hover:translate-y-[-5px]">
-        <div className="relative w-full pt-[65%]">
+      <Card className="crypto-card h-full hover:translate-y-[-5px]">
+        <div className="relative w-full pt-[133%]">
           {/* Country flag */}
           <div className="absolute top-2 right-2 z-10">
             <div className="flex items-center gap-1 bg-background/80 dark:bg-dark-background/80 backdrop-blur-sm px-2 py-1 rounded-full">
@@ -94,7 +94,7 @@ export default function LeaderCard({ leader, onVote }: LeaderCardProps) {
           </div>
         </div>
         
-        <div className="p-3 flex-1 flex flex-col">
+        <div className="p-3 flex flex-col">
           <div className="flex justify-between items-start">
             <h3 className="font-medium text-base mb-1">{leader.name}</h3>
             <div className="flex items-center bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded-full">
@@ -103,7 +103,7 @@ export default function LeaderCard({ leader, onVote }: LeaderCardProps) {
             </div>
           </div>
           
-          <div className="mt-auto flex items-center justify-between pt-2">
+          <div className="flex items-center justify-between pt-2">
             <div className="flex items-center">
               <Award className="w-4 h-4 mr-1 text-crypto-yellow dark:text-crypto-yellow" />
               <span className="text-xs text-muted-foreground">Rank #{leader.id}</span>
