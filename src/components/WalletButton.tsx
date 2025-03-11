@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, Wallet } from "lucide-react";
@@ -83,7 +84,7 @@ export function WalletButton() {
         <Button 
           onClick={handleConnect} 
           disabled={isLoading} 
-          className="rounded-full"
+          className="rounded-full hidden md:flex"
           size="lg"
         >
           {buttonContent()}
@@ -93,7 +94,7 @@ export function WalletButton() {
           onClick={handleSwitchNetwork} 
           disabled={isLoading} 
           variant="secondary" 
-          className="rounded-full"
+          className="rounded-full hidden md:flex"
           size="lg"
         >
           {buttonContent()}
@@ -103,7 +104,7 @@ export function WalletButton() {
           <DialogTrigger asChild>
             <Button 
               variant="outline" 
-              className="rounded-full neo-effect bg-white hover:bg-neutral-50" 
+              className="rounded-full neo-effect bg-white hover:bg-neutral-50 hidden md:flex" 
               size="lg"
             >
               {buttonContent()}
