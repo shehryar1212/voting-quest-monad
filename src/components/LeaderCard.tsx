@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { ThumbsUp } from "lucide-react";
+import { ThumbsUp, Award, TrendingUp } from "lucide-react";
 import { Leader, VOTE_COST_IN_MON, VOTE_COST_IN_WEI } from "@/lib/constants";
 import { useWallet } from "@/hooks/useWallet";
 import TransactionModal from "./TransactionModal";
@@ -69,19 +69,22 @@ export default function LeaderCard({ leader, onVote }: LeaderCardProps) {
 
   return (
     <>
-      <Card className="flex flex-col overflow-hidden leader-card hover:shadow-lg transition-all duration-300 h-full">
-        <div className="relative w-full pt-[100%]">
+      <Card className="crypto-card h-[340px] hover:translate-y-[-5px]">
+        <div className="relative w-full pt-[65%]">
           {/* Country flag */}
           <div className="absolute top-2 right-2 z-10">
-            <img 
-              src={getFlagUrl(leader.countryCode)} 
-              alt={`${leader.country} flag`} 
-              className="w-8 h-auto rounded shadow-sm"
-            />
+            <div className="flex items-center gap-1 bg-background/80 dark:bg-dark-background/80 backdrop-blur-sm px-2 py-1 rounded-full">
+              <img 
+                src={getFlagUrl(leader.countryCode)} 
+                alt={`${leader.country} flag`} 
+                className="w-4 h-auto"
+              />
+              <span className="text-xs font-medium">{leader.country}</span>
+            </div>
           </div>
           
           {/* Leader image */}
-          <div className="absolute inset-0 bg-gray-100 overflow-hidden">
+          <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 overflow-hidden">
             <img 
               src={leader.imgSrc} 
               alt={leader.name} 
@@ -91,21 +94,26 @@ export default function LeaderCard({ leader, onVote }: LeaderCardProps) {
           </div>
         </div>
         
-        <div className="p-4 flex-1 flex flex-col">
-          <h3 className="font-medium text-lg mb-1">{leader.name}</h3>
-          <p className="text-sm text-muted-foreground mb-4">{leader.country}</p>
+        <div className="p-3 flex-1 flex flex-col">
+          <div className="flex justify-between items-start">
+            <h3 className="font-medium text-base mb-1">{leader.name}</h3>
+            <div className="flex items-center bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded-full">
+              <TrendingUp className="w-3 h-3 mr-1 text-primary" />
+              <span className="text-xs font-semibold">{leader.votes}</span>
+            </div>
+          </div>
           
-          <div className="mt-auto flex items-center justify-between">
+          <div className="mt-auto flex items-center justify-between pt-2">
             <div className="flex items-center">
-              <ThumbsUp className="w-4 h-4 mr-2 text-monad" />
-              <span className="font-medium">{leader.votes}</span>
+              <Award className="w-4 h-4 mr-1 text-crypto-yellow dark:text-crypto-yellow" />
+              <span className="text-xs text-muted-foreground">Rank #{leader.id}</span>
             </div>
             
             <Button 
               onClick={handleVoteClick}
               disabled={isVoting}
               size="sm"
-              className="transition-all duration-300 hover:scale-105"
+              className="h-8 text-xs"
             >
               {isVoting ? (
                 "Voting..."

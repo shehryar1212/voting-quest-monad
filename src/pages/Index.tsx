@@ -6,6 +6,8 @@ import LeaderCard from "@/components/LeaderCard";
 import Leaderboard from "@/components/Leaderboard";
 import { LEADERS } from "@/lib/constants";
 import { useWallet } from "@/hooks/useWallet";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { Coins } from "lucide-react";
 
 const Index = () => {
   const [walletState] = useWallet();
@@ -48,19 +50,19 @@ const Index = () => {
 
   // Render loading skeleton
   const renderSkeleton = () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[...Array(9)].map((_, index) => (
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {[...Array(8)].map((_, index) => (
         <div 
           key={index} 
-          className="animate-pulse rounded-lg overflow-hidden bg-gray-100 h-[400px]"
+          className="animate-pulse rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 h-[340px]"
         >
-          <div className="w-full h-[250px] bg-gray-200"></div>
-          <div className="p-4 space-y-3">
-            <div className="h-5 bg-gray-200 rounded w-2/3"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-            <div className="pt-4 flex justify-between">
-              <div className="h-6 bg-gray-200 rounded w-1/4"></div>
-              <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+          <div className="w-full h-[200px] bg-gray-200 dark:bg-gray-700"></div>
+          <div className="p-3 space-y-2">
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
+            <div className="pt-2 flex justify-between">
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
+              <div className="h-7 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
             </div>
           </div>
         </div>
@@ -69,31 +71,38 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30">
+    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30 dark:from-dark-background dark:to-dark-card/20">
       {/* Header */}
-      <header className="container mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
-        <div className="mb-6 md:mb-0">
-          <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-monad-dark via-monad to-blue-400">
-            Blockchain Leader Voting
-          </h1>
-          <p className="text-muted-foreground mt-2 max-w-xl">
-            Vote for your favorite blockchain leaders using Monad testnet. Each vote costs 0.0001 MON.
-          </p>
+      <header className="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+        <div className="mb-4 md:mb-0 flex items-center">
+          <Coins className="h-6 w-6 text-primary mr-2" />
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-monad-dark via-monad to-blue-400">
+              Monad Leaders
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1 max-w-xl">
+              Vote for blockchain leaders on Monad testnet. Cost: 0.0001 MON per vote.
+            </p>
+          </div>
         </div>
         
-        <WalletButton />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <WalletButton />
+        </div>
       </header>
       
       <main className="container mx-auto px-4 pb-20">
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mt-10">
+        <div className="grid md:grid-cols-4 gap-4 mt-4">
           {/* Main Content - Leader Cards */}
-          <div className="md:col-span-2 lg:col-span-3">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-semibold">Leaders</h2>
+          <div className="md:col-span-3">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold">Blockchain Leaders</h2>
               <Button
                 variant="outline"
                 onClick={sortLeaders}
-                className="text-sm"
+                size="sm"
+                className="text-xs"
               >
                 Sort by {sortedBy === "default" ? "ID" : "Votes"} ↓
               </Button>
@@ -102,7 +111,7 @@ const Index = () => {
             {isLoading ? (
               renderSkeleton()
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-scale-in">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 animate-scale-in">
                 {leaders.map(leader => (
                   <LeaderCard 
                     key={leader.id} 
@@ -115,13 +124,13 @@ const Index = () => {
           </div>
           
           {/* Sidebar - Leaderboard */}
-          <div className="md:col-span-1 lg:col-span-1 space-y-6">
+          <div className="md:col-span-1 space-y-4">
             <Leaderboard leaders={leaders} />
             
             {!isConnected && (
-              <div className="glass-effect p-6 rounded-lg text-center space-y-4 animate-float">
-                <h3 className="font-medium">Ready to Vote?</h3>
-                <p className="text-sm text-muted-foreground">
+              <div className="glass-effect p-4 rounded-lg text-center space-y-3 animate-float">
+                <h3 className="font-medium text-sm">Ready to Vote?</h3>
+                <p className="text-xs text-muted-foreground">
                   Connect your wallet to start voting for your favorite blockchain leaders.
                 </p>
                 <WalletButton />
@@ -132,8 +141,8 @@ const Index = () => {
       </main>
       
       {/* Footer */}
-      <footer className="py-6 border-t bg-white/50 backdrop-blur-sm">
-        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
+      <footer className="py-4 border-t dark:border-dark-border bg-white/50 dark:bg-dark-card/30 backdrop-blur-sm">
+        <div className="container mx-auto px-4 text-center text-xs text-muted-foreground">
           <p>Built on the Monad testnet. For demonstration purposes only.</p>
         </div>
       </footer>

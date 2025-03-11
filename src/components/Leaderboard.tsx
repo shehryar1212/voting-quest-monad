@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle 
 } from "@/components/ui/card";
-import { Trophy, Medal } from "lucide-react";
+import { Trophy, Medal, TrendingUp } from "lucide-react";
 import { Leader } from "@/lib/constants";
 
 interface LeaderboardProps {
@@ -31,56 +31,55 @@ export default function Leaderboard({ leaders }: LeaderboardProps) {
   const getMedalColor = (position: number) => {
     switch (position) {
       case 0:
-        return "text-yellow-400"; // Gold
+        return "text-crypto-yellow"; // Gold
       case 1:
-        return "text-gray-400"; // Silver
+        return "text-gray-300"; // Silver
       case 2:
-        return "text-amber-700"; // Bronze
+        return "text-amber-600"; // Bronze
       default:
-        return "text-gray-300"; // Other positions
+        return "text-gray-400"; // Other positions
     }
   };
 
   // Get icon based on position
   const getMedalIcon = (position: number) => {
     if (position === 0) {
-      return <Trophy className={`h-5 w-5 ${getMedalColor(position)}`} />;
+      return <Trophy className={`h-4 w-4 ${getMedalColor(position)}`} />;
     }
-    return <Medal className={`h-5 w-5 ${getMedalColor(position)}`} />;
+    return <Medal className={`h-4 w-4 ${getMedalColor(position)}`} />;
   };
 
   return (
     <Card className="glass-effect w-full">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-xl flex items-center">
-          <Trophy className="mr-2 h-5 w-5 text-yellow-500" /> 
-          Leaderboard
+      <CardHeader className="pb-2 p-4">
+        <CardTitle className="text-base flex items-center">
+          <TrendingUp className="mr-2 h-4 w-4 text-primary" /> 
+          Top Leaders
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
+      <CardContent className="p-4 pt-0">
+        <div className="space-y-2">
           {topLeaders.map((leader, index) => (
             <div 
               key={leader.id}
-              className="flex items-center justify-between p-3 rounded-lg bg-white/60 backdrop-blur-sm animate-slide-up"
+              className="flex items-center justify-between p-2 rounded-lg bg-background/60 dark:bg-dark-highlight/30 backdrop-blur-sm animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="flex items-center">
                 <div className="flex items-center justify-center w-6">
                   {getMedalIcon(index)}
                 </div>
-                <div className="ml-3 flex items-center">
+                <div className="ml-2 flex items-center">
                   <img 
                     src={getFlagUrl(leader.countryCode)} 
                     alt={`${leader.country} flag`}
-                    className="w-5 h-auto mr-2"
+                    className="w-4 h-auto mr-1"
                   />
-                  <span className="font-medium">{leader.name}</span>
+                  <span className="text-xs font-medium">{leader.name}</span>
                 </div>
               </div>
-              <div className="flex items-center bg-monad/10 px-2 py-1 rounded-full">
-                <span className="text-sm font-semibold">{leader.votes}</span>
-                <span className="text-xs ml-1 text-muted-foreground">votes</span>
+              <div className="flex items-center bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded-full">
+                <span className="text-xs font-semibold">{leader.votes}</span>
               </div>
             </div>
           ))}
