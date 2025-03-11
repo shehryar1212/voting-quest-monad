@@ -22,11 +22,11 @@ export type Leader = {
 export const LEADERS: Leader[] = [
   { 
     id: 1, 
-    name: "Satoshi Nakamoto", 
-    country: "Japan",
-    countryCode: "jp",
-    imgSrc: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=1374",
-    votes: 214
+    name: "Donald Trump", 
+    country: "United States",
+    countryCode: "US",
+    imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/TrumpPortrait.jpg/330px-TrumpPortrait.jpg",
+    votes: 109
   },
   { 
     id: 2, 
