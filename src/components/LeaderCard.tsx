@@ -118,7 +118,7 @@ export default function LeaderCard({ leader, onVote }: LeaderCardProps) {
               {isVoting ? (
                 "Voting..."
               ) : (
-                <>Vote ({VOTE_COST_IN_MON} MON)</>
+                <>Vote</>
               )}
             </Button>
           </div>
