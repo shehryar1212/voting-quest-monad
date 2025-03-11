@@ -113,7 +113,7 @@ export default function LeaderCard({ leader, onVote }: LeaderCardProps) {
               onClick={handleVoteClick}
               disabled={isVoting}
               size="sm"
-              className="h-8 text-xs"
+              className="h-8 text-xs px-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[110px] min-w-[80px]"
             >
               {isVoting ? (
                 "Voting..."
