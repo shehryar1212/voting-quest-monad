@@ -103,7 +103,7 @@ const Index = () => {
                 <span className="sr-only">Disconnect wallet</span>
               </Button>
 
-              {/* Mobile disconnect button */}
+              {/* Mobile disconnect button
               <Button
                 variant="outline"
                 size="sm"
@@ -112,7 +112,7 @@ const Index = () => {
               >
                 <LogOut className="h-4 w-4 mr-1" />
                 <span>Disconnect</span>
-              </Button>
+              </Button> */}
             </>
           )}
         </div>
