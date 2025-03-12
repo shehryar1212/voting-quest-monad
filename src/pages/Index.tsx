@@ -81,7 +81,7 @@ const Index = () => {
               Monad Leaders
             </h1>
             <p className="text-sm text-muted-foreground mt-1 max-w-xl">
-              Vote for blockchain leaders on Monad testnet. Cost: 0.0001 MON per vote.
+              Vote for your OGs.
             </p>
           </div>
         </div>
@@ -139,7 +139,7 @@ const Index = () => {
             <Leaderboard leaders={leaders} />
             
             {/* Desktop "Ready to Vote" section */}
-            {!isConnected && (
+            {/* {!isConnected && (
               <div className="hidden md:block glass-effect p-4 rounded-lg text-center space-y-3 animate-float">
                 <h3 className="font-medium text-sm">Ready to Vote?</h3>
                 <p className="text-xs text-muted-foreground">
@@ -147,7 +147,7 @@ const Index = () => {
                 </p>
                 <WalletButton />
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </main>
