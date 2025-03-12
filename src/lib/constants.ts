@@ -62,34 +62,34 @@ export const LEADERS: Leader[] = [
   },
   { 
     id: 6, 
-    name: "Arthur Breitman", 
-    country: "France",
-    countryCode: "fr",
-    imgSrc: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=1374",
-    votes: 92
+    name: "Changpeng Zhao", 
+    country: "Canada",
+    countryCode: "CA",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkhWZAuBx5hn0E3ps6ESQ0HrHDondOgMtQYQ&s",
+    votes: 86
   },
   { 
     id: 7, 
-    name: "Jae Kwon", 
-    country: "South Korea",
-    countryCode: "kr",
-    imgSrc: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=1374",
-    votes: 87
+    name: "Waqar Zaka", 
+    country: "Pakistan",
+    countryCode: "PK",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBcW9zleWLJXn57lxsT99Ak-TAd1vjtZbOBQ&s",
+    votes: 81
   },
   { 
     id: 8, 
-    name: "Joseph Lubin", 
-    country: "Canada",
-    countryCode: "ca",
-    imgSrc: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=1374",
+    name: "Michael J. Saylor", 
+    country: "United States",
+    countryCode: "us",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6cb8GIV8Errjiu20RMY9FhCLaedSRcMwoPw&s",
     votes: 74
   },
   { 
     id: 9, 
-    name: "Da Hongfei", 
-    country: "China",
-    countryCode: "cn",
-    imgSrc: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=1374",
+    name: "Andreas Antonopoulos", 
+    country: "United Kingdom",
+    countryCode: "uk",
+    imgSrc: "https://images-na.ssl-images-amazon.com/images/S/amzn-author-media-prod/o6bllblap6u2tsbi1btrgdbeh.__01_SX120_CR0,0,120,120__.jpg",
     votes: 69
   }
 ];
