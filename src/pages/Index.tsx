@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { WalletButton } from "@/components/WalletButton";
@@ -7,12 +6,13 @@ import Leaderboard from "@/components/Leaderboard";
 import { LEADERS } from "@/lib/constants";
 import { useWallet } from "@/hooks/useWallet";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Coins } from "lucide-react";
+import { Coins, LogOut } from "lucide-react";
 
 const Index = () => {
-  const [walletState] = useWallet();
+  const [walletState, walletActions] = useWallet();
   const { isConnected } = walletState;
-  
+  const { disconnect } = walletActions;
+
   const [leaders, setLeaders] = useState(LEADERS);
   const [sortedBy, setSortedBy] = useState<"default" | "votes">("default");
   const [isLoading, setIsLoading] = useState(true);
@@ -22,18 +22,18 @@ const Index = () => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
   // Handle voting
   const handleVote = (leaderId: number) => {
-    setLeaders(prevLeaders => 
-      prevLeaders.map(leader => 
+    setLeaders((prevLeaders) =>
+      prevLeaders.map((leader) =>
         leader.id === leaderId
           ? { ...leader, votes: leader.votes + 1 }
-          : leader
-      )
+          : leader,
+      ),
     );
   };
 
@@ -52,8 +52,8 @@ const Index = () => {
   const renderSkeleton = () => (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {[...Array(8)].map((_, index) => (
-        <div 
-          key={index} 
+        <div
+          key={index}
           className="animate-pulse rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 h-[340px]"
         >
           <div className="w-full h-[200px] bg-gray-200 dark:bg-gray-700"></div>
@@ -85,30 +85,47 @@ const Index = () => {
             </p>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <WalletButton />
+          {isConnected && (
+            <>
+              {/* Desktop disconnect button */}
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={disconnect}
+                className="rounded-full neo-effect bg-white hover:bg-neutral-50 hidden md:flex"
+                title="Disconnect wallet"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="sr-only">Disconnect wallet</span>
+              </Button>
+
+              {/* Mobile disconnect button */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={disconnect}
+                className="rounded-full neo-effect bg-white hover:bg-neutral-50 md:hidden flex items-center"
+              >
+                <LogOut className="h-4 w-4 mr-1" />
+                <span>Disconnect</span>
+              </Button>
+            </>
+          )}
         </div>
-        
-        {/* Mobile "Ready to Vote" section */}
-        {!isConnected && (
-          <div className="md:hidden w-full glass-effect p-4 rounded-lg text-center space-y-3 animate-float mt-4">
-            <h3 className="font-medium text-sm">Ready to Vote?</h3>
-            <p className="text-xs text-muted-foreground">
-              Connect your wallet to start voting for your favorite blockchain leaders.
-            </p>
-            <WalletButton />
-          </div>
-        )}
       </header>
-      
+
       <main className="container mx-auto px-4 pb-20">
         <div className="grid md:grid-cols-4 gap-4 mt-4">
           {/* Main Content - Leader Cards */}
           <div className="md:col-span-3">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold">Look in the eyes and hit vote</h2>
+              <h2 className="text-lg font-semibold">
+                Look in the eyes and hit vote
+              </h2>
               <Button
                 variant="outline"
                 onClick={sortLeaders}
@@ -118,26 +135,26 @@ const Index = () => {
                 Sort by {sortedBy === "default" ? "ID" : "Votes"} ↓
               </Button>
             </div>
-            
+
             {isLoading ? (
               renderSkeleton()
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 animate-scale-in">
-                {leaders.map(leader => (
-                  <LeaderCard 
-                    key={leader.id} 
-                    leader={leader} 
-                    onVote={handleVote} 
+                {leaders.map((leader) => (
+                  <LeaderCard
+                    key={leader.id}
+                    leader={leader}
+                    onVote={handleVote}
                   />
                 ))}
               </div>
             )}
           </div>
-          
+
           {/* Sidebar - Leaderboard */}
           <div className="md:col-span-1 space-y-4">
             <Leaderboard leaders={leaders} />
-            
+
             {/* Desktop "Ready to Vote" section */}
             {/* {!isConnected && (
               <div className="hidden md:block glass-effect p-4 rounded-lg text-center space-y-3 animate-float">
@@ -151,7 +168,7 @@ const Index = () => {
           </div>
         </div>
       </main>
-      
+
       {/* Footer */}
       <footer className="py-4 border-t dark:border-dark-border bg-white/50 dark:bg-dark-card/30 backdrop-blur-sm">
         <div className="container mx-auto px-4 text-center text-xs text-muted-foreground">
