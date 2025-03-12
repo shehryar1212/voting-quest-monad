@@ -1,127 +1,84 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, Wallet, LogOut } from "lucide-react";
-import { 
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useWallet } from "@/hooks/useWallet";
 import { MONAD_TESTNET_CHAIN_ID, MONAD_TESTNET_CHAIN_ID_DECIMAL } from "@/lib/constants";
-
 export function WalletButton() {
   const [walletState, walletActions] = useWallet();
-  const { address, balance, chainId, isConnected, isCorrectNetwork } = walletState;
-  const { connect, disconnect, switchToMonadNetwork } = walletActions;
-  
+  const {
+    address,
+    balance,
+    chainId,
+    isConnected,
+    isCorrectNetwork
+  } = walletState;
+  const {
+    connect,
+    disconnect,
+    switchToMonadNetwork
+  } = walletActions;
   const [isLoading, setIsLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-
   const handleConnect = async () => {
     setIsLoading(true);
     await connect();
     setIsLoading(false);
   };
-
   const handleSwitchNetwork = async () => {
     setIsLoading(true);
     await switchToMonadNetwork();
     setIsLoading(false);
   };
-
   const handleDisconnect = () => {
     disconnect();
     setDialogOpen(false);
   };
-
   const formatAddress = (addr: string) => {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
-
   const buttonContent = () => {
     if (isLoading) {
-      return (
-        <>
+      return <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           Connecting...
-        </>
-      );
+        </>;
     }
-
     if (!isConnected) {
-      return (
-        <>
+      return <>
           <Wallet className="mr-2 h-4 w-4" />
           <span className="hidden sm:inline">Connect Wallet</span>
-          <span className="sm:hidden">Connect</span>
-        </>
-      );
+          
+        </>;
     }
-
     if (!isCorrectNetwork) {
-      return (
-        <>
+      return <>
           <Wallet className="mr-2 h-4 w-4" />
           <span className="hidden sm:inline">Switch to Monad</span>
           <span className="sm:hidden">Switch</span>
-        </>
-      );
+        </>;
     }
-
-    return (
-      <>
+    return <>
         <Wallet className="mr-2 h-4 w-4" />
         {formatAddress(address)}
-      </>
-    );
+      </>;
   };
 
   // Desktop version of the wallet button
-  const DesktopWalletButton = () => (
-    <div className="hidden md:flex gap-2">
-      {!isConnected ? (
-        <Button 
-          onClick={handleConnect} 
-          disabled={isLoading} 
-          className="rounded-full"
-          size="lg"
-        >
+  const DesktopWalletButton = () => <div className="hidden md:flex gap-2">
+      {!isConnected ? <Button onClick={handleConnect} disabled={isLoading} size="lg" className="rounded-full text-center">
           {buttonContent()}
-        </Button>
-      ) : !isCorrectNetwork ? (
-        <Button 
-          onClick={handleSwitchNetwork} 
-          disabled={isLoading} 
-          variant="secondary" 
-          className="rounded-full"
-          size="lg"
-        >
+        </Button> : !isCorrectNetwork ? <Button onClick={handleSwitchNetwork} disabled={isLoading} variant="secondary" className="rounded-full" size="lg">
           {buttonContent()}
-        </Button>
-      ) : (
-        <>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleDisconnect}
-            className="rounded-full neo-effect bg-white hover:bg-neutral-50"
-            title="Disconnect wallet"
-          >
+        </Button> : <>
+          <Button variant="outline" size="icon" onClick={handleDisconnect} className="rounded-full neo-effect bg-white hover:bg-neutral-50" title="Disconnect wallet">
             <LogOut className="h-4 w-4" />
             <span className="sr-only">Disconnect wallet</span>
           </Button>
           
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button 
-                variant="outline" 
-                className="rounded-full neo-effect bg-white hover:bg-neutral-50" 
-                size="lg"
-              >
+              <Button variant="outline" className="rounded-full neo-effect bg-white hover:bg-neutral-50" size="lg">
                 {buttonContent()}
               </Button>
             </DialogTrigger>
@@ -160,41 +117,18 @@ export function WalletButton() {
               </div>
             </DialogContent>
           </Dialog>
-        </>
-      )}
-    </div>
-  );
+        </>}
+    </div>;
 
   // Mobile version of the wallet button
-  const MobileWalletButton = () => (
-    <div className="flex md:hidden">
-      {!isConnected ? (
-        <Button 
-          onClick={handleConnect} 
-          disabled={isLoading} 
-          className="rounded-full"
-          size="sm"
-        >
+  const MobileWalletButton = () => <div className="flex md:hidden">
+      {!isConnected ? <Button onClick={handleConnect} disabled={isLoading} className="rounded-full" size="sm">
           {buttonContent()}
-        </Button>
-      ) : !isCorrectNetwork ? (
-        <Button 
-          onClick={handleSwitchNetwork} 
-          disabled={isLoading} 
-          variant="secondary" 
-          className="rounded-full"
-          size="sm"
-        >
+        </Button> : !isCorrectNetwork ? <Button onClick={handleSwitchNetwork} disabled={isLoading} variant="secondary" className="rounded-full" size="sm">
           {buttonContent()}
-        </Button>
-      ) : (
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        </Button> : <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button 
-              variant="outline" 
-              className="rounded-full neo-effect bg-white hover:bg-neutral-50" 
-              size="sm"
-            >
+            <Button variant="outline" className="rounded-full neo-effect bg-white hover:bg-neutral-50" size="sm">
               {buttonContent()}
             </Button>
           </DialogTrigger>
@@ -232,15 +166,10 @@ export function WalletButton() {
               </Button>
             </div>
           </DialogContent>
-        </Dialog>
-      )}
-    </div>
-  );
-
-  return (
-    <>
+        </Dialog>}
+    </div>;
+  return <>
       <DesktopWalletButton />
       <MobileWalletButton />
-    </>
-  );
+    </>;
 }
