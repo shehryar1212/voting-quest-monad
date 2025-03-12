@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { WalletButton } from "@/components/WalletButton";
@@ -90,17 +89,6 @@ const Index = () => {
           <ThemeToggle />
           <WalletButton />
         </div>
-        
-        {/* Mobile "Ready to Vote" section */}
-        {!isConnected && (
-          <div className="md:hidden w-full glass-effect p-4 rounded-lg text-center space-y-3 animate-float mt-4">
-            <h3 className="font-medium text-sm">Ready to Vote?</h3>
-            <p className="text-xs text-muted-foreground">
-              Connect your wallet to start voting for your favorite blockchain leaders.
-            </p>
-            <WalletButton />
-          </div>
-        )}
       </header>
       
       <main className="container mx-auto px-4 pb-20">
