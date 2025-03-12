@@ -84,14 +84,7 @@ export const LEADERS: Leader[] = [
     imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6cb8GIV8Errjiu20RMY9FhCLaedSRcMwoPw&s",
     votes: 74
   },
-  { 
-    id: 9, 
-    name: "Andreas Antonopoulos", 
-    country: "United Kingdom",
-    countryCode: "uk",
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCXpHuhEpeAW_u1y5WtqEGbIVdiwMHtv9bGw&s",
-    votes: 69
-  }
+ 
 ];
 
 // Monad network parameters for wallet connection
