@@ -54,7 +54,7 @@ export default function Leaderboard({ leaders }: LeaderboardProps) {
       <CardHeader className="pb-2 p-4">
         <CardTitle className="text-base flex items-center">
           <TrendingUp className="mr-2 h-4 w-4 text-primary" /> 
-          Top Leaders
+          Look who's winning...
         </CardTitle>
       </CardHeader>
       <CardContent className="p-4 pt-0">
