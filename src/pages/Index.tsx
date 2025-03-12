@@ -78,7 +78,7 @@ const Index = () => {
           <Coins className="h-6 w-6 text-primary mr-2" />
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-monad-dark via-monad to-blue-400">
-              Monad Leaders
+              The ultimate quest in the making of Monad
             </h1>
             <p className="text-sm text-muted-foreground mt-1 max-w-xl">
               Vote for your OGs.
@@ -155,7 +155,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-4 border-t dark:border-dark-border bg-white/50 dark:bg-dark-card/30 backdrop-blur-sm">
         <div className="container mx-auto px-4 text-center text-xs text-muted-foreground">
-          <p>Built on the Monad testnet. For demonstration purposes only.</p>
+          <p>Built for the love of Monad</p>
         </div>
       </footer>
     </div>
