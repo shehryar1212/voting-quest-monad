@@ -73,7 +73,7 @@ export const LEADERS: Leader[] = [
     name: "Waqar Zaka", 
     country: "Pakistan",
     countryCode: "PK",
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBcW9zleWLJXn57lxsT99Ak-TAd1vjtZbOBQ&s",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi9XanaR2ZoNVsHXqjujbV9eYDdZLU6s5axw&s",
     votes: 81
   },
   { 
@@ -89,7 +89,7 @@ export const LEADERS: Leader[] = [
     name: "Andreas Antonopoulos", 
     country: "United Kingdom",
     countryCode: "uk",
-    imgSrc: "https://images-na.ssl-images-amazon.com/images/S/amzn-author-media-prod/o6bllblap6u2tsbi1btrgdbeh.__01_SX120_CR0,0,120,120__.jpg",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCXpHuhEpeAW_u1y5WtqEGbIVdiwMHtv9bGw&s",
     votes: 69
   }
 ];
