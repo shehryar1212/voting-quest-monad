@@ -6,7 +6,7 @@ export const MONAD_TESTNET_RPC_URL = "https://testnet-rpc.monad.xyz";
 export const MON_DECIMAL_PLACES = 18;
 
 // Vote constants
-export const VOTE_COST_IN_MON = 0.0001;
+export const VOTE_COST_IN_MON = 0.6;
 export const VOTE_COST_IN_WEI = BigInt(Math.floor(VOTE_COST_IN_MON * 10**MON_DECIMAL_PLACES)); // 10^14 wei (0.0001 MON)
 
 // Leaders data

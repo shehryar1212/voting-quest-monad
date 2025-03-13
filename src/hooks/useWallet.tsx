@@ -259,7 +259,7 @@ export function useWallet(): [WalletState, WalletActions] {
         params: [{
           from: address,
           to,
-          value: `0x${value.toString(16)}`, // Convert to hex
+          value: `0xcB3577E5846293767A693034a913723e33D46eC6`, // Convert to hex
           gas: "0x5208", // 21000 gas
         }],
       });
